@@ -1,0 +1,32 @@
+version: "3.3"
+services: 
+    server:
+        build: 
+            context: .
+            dockerfile: Dockerfile
+        env_file: .env
+        depends_on:
+            - postgresdb
+        networks: 
+            - default
+        ports: 
+            - "8888:8888"
+        restart: always
+    postgresdb:
+        image: postgres
+        environment: 
+            POSTGRES_USER: postgres
+            POSTGRES_PASSWORD: mypassword
+            POSTGRES_DB: shorterer
+        ports: 
+            - "5432:5432"
+        volumes: 
+            - data:/var/lib/postgres
+        networks: 
+            - default
+            
+networks: 
+    default:
+
+volumes: 
+    data:
