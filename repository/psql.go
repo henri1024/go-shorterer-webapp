@@ -35,7 +35,7 @@ func MakeDB() (DB, error) {
 		return nil, err
 	}
 
-	defer db.Close()
+	// defer db.Close()
 
 	if err = db.Debug().DropTableIfExists(&model.ShortLink{}).Error; err != nil {
 		return nil, err

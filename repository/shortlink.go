@@ -1,15 +1,21 @@
 package repository
 
-import "shorterer/model"
+import (
+	"shorterer/model"
+	"strings"
+)
 
 func (db *dbm) Save(shortlink *model.ShortLink, flag bool) error {
 	done := false
 
 	for !done {
 		err := db.PsqlDB.Model(&model.ShortLink{}).Save(shortlink).Error
-		if flag {
+		if err != nil && !flag {
+			return err
+		} else if err != nil && !strings.Contains(err.Error(), "duplicate key value") && flag {
 			return err
 		}
+
 		done = err == nil
 	}
 	return nil
