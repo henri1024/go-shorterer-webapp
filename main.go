@@ -2,8 +2,8 @@ package main
 
 import (
 	"log"
-	"shorterer/controller"
-	"shorterer/repository"
+	"go-shorterer/controller"
+	"go-shorterer/repository"
 
 	"github.com/joho/godotenv"
 )

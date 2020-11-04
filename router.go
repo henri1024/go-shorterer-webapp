@@ -1,7 +1,7 @@
 package main
 
 import (
-	"shorterer/controller"
+	"go-shorterer/controller"
 
 	"github.com/gin-gonic/gin"
 )

@@ -1,4 +1,4 @@
-module shorterer
+module go-shorterer
 
 go 1.14
 

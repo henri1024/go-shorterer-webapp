@@ -1,7 +1,7 @@
 package controller
 
 import (
-	"shorterer/model"
+	"go-shorterer/model"
 
 	"github.com/stretchr/testify/mock"
 )

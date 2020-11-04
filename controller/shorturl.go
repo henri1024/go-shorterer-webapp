@@ -1,10 +1,10 @@
 package controller
 
 import (
+	"go-shorterer/model"
+	"go-shorterer/repository"
 	"log"
 	"net/http"
-	"shorterer/model"
-	"shorterer/repository"
 
 	"github.com/gin-gonic/gin"
 )

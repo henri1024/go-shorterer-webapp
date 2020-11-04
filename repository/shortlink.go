@@ -1,7 +1,7 @@
 package repository
 
 import (
-	"shorterer/model"
+	"go-shorterer/model"
 	"strings"
 )
 

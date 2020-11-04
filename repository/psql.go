@@ -3,7 +3,7 @@ package repository
 import (
 	"fmt"
 	"os"
-	"shorterer/model"
+	"go-shorterer/model"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
