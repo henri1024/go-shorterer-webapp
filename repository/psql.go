@@ -1,9 +1,8 @@
 package repository
 
 import (
-	"fmt"
-	"os"
 	"go-shorterer/model"
+	"os"
 
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -52,11 +51,14 @@ func MakeDB() (DB, error) {
 }
 
 func generateDBURL() string {
-	host := os.Getenv("DB_HOST")
-	user := os.Getenv("DB_USER")
-	password := os.Getenv("DB_PASSWORD")
-	name := os.Getenv("DB_NAME")
-	port := os.Getenv("DB_PORT")
+	// host := os.Getenv("DB_HOST")
+	// user := os.Getenv("DB_USER")
+	// password := os.Getenv("DB_PASSWORD")
+	// name := os.Getenv("DB_NAME")
+	// port := os.Getenv("DB_PORT")
 
-	return fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", host, port, user, name, password)
+	// return fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", host, port, user, name, password)
+
+	dbUrl := os.Getenv("DATABASE_URL")
+	return dbUrl
 }
