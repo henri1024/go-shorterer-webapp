@@ -39,7 +39,7 @@ func (suc *ShortUrlController) CreateNewShorterer(c *gin.Context) {
 
 	if err := suc.shortUrlRepository.Save(shortlink, flag); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"msg": "invalid request",
+			"msg": err.Error(),
 		})
 		return
 	}
