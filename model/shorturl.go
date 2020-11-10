@@ -2,9 +2,11 @@ package model
 
 import (
 	"errors"
+	"html"
 	"math/rand"
 	"net/url"
 	"regexp"
+	"strings"
 	"time"
 )
 
@@ -24,7 +26,14 @@ type ShortLink struct {
 	DeletedAt *time.Time `sql:"index"`
 }
 
+func (sl *ShortLink) Prepare() {
+	sl.DestinationValue = strings.ToLower(html.EscapeString(strings.TrimSpace(sl.DestinationValue)))
+	sl.SourceKey = strings.ToLower(html.EscapeString(strings.TrimSpace(sl.SourceKey)))
+}
+
 func (sl *ShortLink) Validate() error {
+
+	sl.Prepare()
 
 	if sl.SourceKey != "" {
 		re := regexp.MustCompile(keyval)

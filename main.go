@@ -1,9 +1,9 @@
 package main
 
 import (
-	"log"
 	"go-shorterer/controller"
 	"go-shorterer/repository"
+	"log"
 
 	"github.com/joho/godotenv"
 )
@@ -25,7 +25,7 @@ func main() {
 		log.Fatal("error : \v\n", err)
 	}
 
-	controller := controller.NewShortUrlController(db)
+	controller := controller.NewMainController(db)
 
 	router := NewRouter(controller)
 

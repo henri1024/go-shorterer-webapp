@@ -12,7 +12,7 @@ type Router struct {
 }
 
 // NewRouter to create a router struct and return it as pointer
-func NewRouter(controller *controller.ShortUrlController) *Router {
+func NewRouter(controller *controller.MainController) *Router {
 	router := &Router{
 		gin.Default(),
 	}
@@ -21,7 +21,8 @@ func NewRouter(controller *controller.ShortUrlController) *Router {
 }
 
 // AddEndPoint which serve and connect url path to controller
-func (r *Router) AddEndPoint(controller *controller.ShortUrlController) {
+func (r *Router) AddEndPoint(controller *controller.MainController) {
 	r.Router.POST("api/new", controller.CreateNewShorterer)
+	r.Router.POST("api/newkey", controller.CreateUserAPIKEY)
 	r.Router.GET(":key", controller.AccessShorterer)
 }

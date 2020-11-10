@@ -1,6 +1,7 @@
 package repository
 
 import (
+	"fmt"
 	"go-shorterer/model"
 	"os"
 
@@ -15,9 +16,11 @@ type dbm struct {
 }
 
 type DB interface {
-	Save(*model.ShortLink, bool) error
-	Delete(string) error
+	SaveShortlink(*model.ShortLink, bool) error
+	DeleteShortlink(string) error
 	GetDestination(string) (string, error)
+	SaveUser(*model.User) error
+	CheckAPIKey(string) bool
 }
 
 // MakeDB create new DB object
@@ -36,10 +39,10 @@ func MakeDB() (DB, error) {
 
 	// defer db.Close()
 
-	if err = db.Debug().DropTableIfExists(&model.ShortLink{}).Error; err != nil {
+	if err = db.Debug().DropTableIfExists(&model.ShortLink{}, &model.User{}).Error; err != nil {
 		return nil, err
 	}
-	if err = db.Debug().AutoMigrate(&model.ShortLink{}).Error; err != nil {
+	if err = db.Debug().AutoMigrate(&model.ShortLink{}, &model.User{}).Error; err != nil {
 		return nil, err
 	}
 
@@ -51,14 +54,14 @@ func MakeDB() (DB, error) {
 }
 
 func generateDBURL() string {
-	// host := os.Getenv("DB_HOST")
-	// user := os.Getenv("DB_USER")
-	// password := os.Getenv("DB_PASSWORD")
-	// name := os.Getenv("DB_NAME")
-	// port := os.Getenv("DB_PORT")
+	host := os.Getenv("DB_HOST")
+	user := os.Getenv("DB_USER")
+	password := os.Getenv("DB_PASSWORD")
+	name := os.Getenv("DB_NAME")
+	port := os.Getenv("DB_PORT")
 
-	// return fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", host, port, user, name, password)
+	return fmt.Sprintf("host=%s port=%s user=%s dbname=%s sslmode=disable password=%s", host, port, user, name, password)
 
-	dbUrl := os.Getenv("DATABASE_URL")
-	return dbUrl
+	// dbUrl := os.Getenv("DATABASE_URL")
+	// return dbUrl
 }

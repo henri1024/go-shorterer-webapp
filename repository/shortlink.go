@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-func (db *dbm) Save(shortlink *model.ShortLink, flag bool) error {
+func (db *dbm) SaveShortlink(shortlink *model.ShortLink, flag bool) error {
 	done := false
 
 	for !done {
@@ -21,7 +21,7 @@ func (db *dbm) Save(shortlink *model.ShortLink, flag bool) error {
 	return nil
 }
 
-func (db *dbm) Delete(sourceKey string) error {
+func (db *dbm) DeleteShortlink(sourceKey string) error {
 	return nil
 }
 
