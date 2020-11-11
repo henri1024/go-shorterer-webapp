@@ -1,0 +1,14 @@
+* {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.nav-link{
+    font-size: xx-large;
+    text-decoration: none;
+    color: black;
+    font-weight: 800;
+}
+
+.form-section{
+    max-width: 500px;
+}

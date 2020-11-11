@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
+        integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div class="container">
+        <nav class="navbar navbar-expand-sm">
+            <ul class="navbar-nav mx-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Go-Shorterer-Webapp</a>
+                </li>
+            </ul>
+        </nav>
+        <div class="form-section mx-auto">
+            <form action="#">
+                <div class="form-group">
+                    <label for="destination">Your Url:</label>
+                    <input type="url" class="form-control" placeholder="Enter Url" id="destination">
+                </div>
+                <div class="form-group">
+                    <label for="unique-key">Your Shorter Url (Optional):</label>
+                    <input type="text" class="form-control" placeholder="Enter Your Shorterer Text" id="unique-key">
+                </div>
+                <div class="form-group">
+                    <label for="api-key">Your APIKEY:</label>
+                    <input type="text" class="form-control" placeholder="Enter Your APIKEY" id="api-key">
+                </div>
+                <p>dont have APIKEY ? <a href="./register.html">register here</a></p>
+                
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

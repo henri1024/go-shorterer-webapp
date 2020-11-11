@@ -39,8 +39,17 @@ func (suc *MainController) CreateUserAPIKEY(c *gin.Context) {
 
 	log.Printf("user api key created : %v\n", user)
 
+	err = suc.mail.Send(user.APIKEY, user.Email)
+
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{
+			"msg": err.Error(),
+		})
+		return
+	}
+
 	c.JSON(http.StatusCreated, gin.H{
-		"api_key": user.APIKEY,
+		"msg": "APIKEY created, send to mail",
 	})
 
 	return

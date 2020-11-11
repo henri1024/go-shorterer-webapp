@@ -1,9 +1,11 @@
 package main
 
 import (
+	"go-shorterer/app"
 	"go-shorterer/controller"
 	"go-shorterer/repository"
 	"log"
+	"os"
 
 	"github.com/joho/godotenv"
 )
@@ -25,9 +27,19 @@ func main() {
 		log.Fatal("error : \v\n", err)
 	}
 
-	controller := controller.NewMainController(db)
+	mailWidget := app.NewEmailWidget(generateMailWidget())
+
+	controller := controller.NewMainController(db, mailWidget)
 
 	router := NewRouter(controller)
 
 	log.Fatal(router.Router.Run())
+}
+
+func generateMailWidget() (string, string, string, string) {
+	from := os.Getenv("MAIL_FROM")
+	password := os.Getenv("MAIL_PASSWORD")
+	smtphost := os.Getenv("MAIL_HOST")
+	smtpport := os.Getenv("MAIL_PORT")
+	return from, password, smtphost, smtpport
 }

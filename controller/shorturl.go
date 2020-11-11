@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"go-shorterer/model"
 	"log"
 	"net/http"
@@ -9,9 +8,9 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-type Query struct {
-	apikey string `form:"apikey" xml:"apikey" json:"apikey" binding:"required"`
-}
+// type Query struct {
+// 	apikey string `form:"apikey"`
+// }
 
 func (suc *MainController) CreateNewShorterer(c *gin.Context) {
 	shortlink := &model.ShortLink{}
@@ -22,18 +21,24 @@ func (suc *MainController) CreateNewShorterer(c *gin.Context) {
 		return
 	}
 
-	query := &Query{}
+	// query := &Query{}
 
-	if err := c.ShouldBind(query); err != nil {
+	// if err := c.ShouldBindQuery(query); err != nil || query.apikey == "" {
+	// 	c.JSON(http.StatusUnauthorized, gin.H{
+	// 		"msg": "invalid api key",
+	// 	})
+	// 	return
+	// }
+	var apikey string
+
+	if apikey = c.Query("apikey"); apikey == "" {
 		c.JSON(http.StatusUnauthorized, gin.H{
-			"msg": fmt.Sprint("no api key, error : \v", err),
+			"msg": "invalid api key",
 		})
 		return
 	}
 
-	log.Printf("received api key : %v\n", query.apikey)
-
-	if pass := suc.repo.CheckAPIKey(query.apikey); !pass {
+	if pass := suc.repo.CheckAPIKey(apikey); !pass {
 		c.JSON(http.StatusUnauthorized, gin.H{
 			"msg": "invalid api key",
 		})
