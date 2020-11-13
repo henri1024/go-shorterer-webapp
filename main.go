@@ -7,6 +7,7 @@ import (
 	"log"
 	"os"
 
+	"github.com/gin-contrib/cors"
 	"github.com/joho/godotenv"
 )
 
@@ -31,7 +32,15 @@ func main() {
 
 	controller := controller.NewMainController(db, mailWidget)
 
-	router := NewRouter(controller)
+	corsWidget := cors.New(cors.Config{
+		AllowAllOrigins:  true,
+		AllowMethods:     []string{"POST", "GET"},
+		AllowHeaders:     []string{"Origin"},
+		ExposeHeaders:    []string{"content-length"},
+		AllowCredentials: true,
+	})
+
+	router := NewRouter(controller, corsWidget)
 
 	log.Fatal(router.Router.Run())
 }

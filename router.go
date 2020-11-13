@@ -12,10 +12,11 @@ type Router struct {
 }
 
 // NewRouter to create a router struct and return it as pointer
-func NewRouter(controller *controller.MainController) *Router {
+func NewRouter(controller *controller.MainController, corsMid gin.HandlerFunc) *Router {
 	router := &Router{
 		gin.Default(),
 	}
+	router.Router.Use(corsMid)
 	router.AddEndPoint(controller)
 	return router
 }
