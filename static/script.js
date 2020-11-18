@@ -8,9 +8,6 @@ regform.submit(function(e){
         type: regform.attr('method'),
         url: regform.attr('action'),
         data: regform.serialize(),
-        headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-        },
         success: function(data){
             console.log(data)
             console.log('success')
