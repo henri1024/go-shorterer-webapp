@@ -4,6 +4,7 @@ import (
 	"go-shorterer/model"
 	"log"
 	"net/http"
+	"strings"
 
 	"github.com/gin-gonic/gin"
 	"github.com/google/uuid"
@@ -16,6 +17,7 @@ func (suc *MainController) CreateUserAPIKEY(c *gin.Context) {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"msg": "invalid format",
 		})
+		return
 	}
 
 	err := user.Validate()
@@ -28,11 +30,16 @@ func (suc *MainController) CreateUserAPIKEY(c *gin.Context) {
 	}
 
 	user.APIKEY = uuid.New().String()
-	err = suc.repo.SaveUser(user)
+	if err = suc.repo.SaveUser(user); err != nil {
+		var msg string
+		if strings.Contains(err.Error(), "duplicate key value") {
+			msg = "Email Already Registered"
+		} else {
+			msg = "Something went wrong"
+		}
 
-	if err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
-			"msg": err.Error(),
+			"msg": msg,
 		})
 		return
 	}

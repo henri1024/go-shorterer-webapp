@@ -1,20 +1,26 @@
-const APIKEY = '801e17cd-9bb7-4ee0-b671-886be1225e55'
-
 var regform = $("#reg-form");
-regform.submit(function(e){
+regform.submit(function (e) {
     e.preventDefault();
+    var dataArray = $(this).serializeArray(),
+        dataObj = {};
+
+    $(dataArray).each(function (i, field) {
+        dataObj[field.name+""] = field.value;
+    });
+
+    var cleanData = JSON.stringify(dataObj)
 
     $.ajax({
         type: regform.attr('method'),
         url: regform.attr('action'),
-        data: regform.serialize(),
+        data: cleanData,
         success: function(data){
-            console.log(data)
-            console.log('success')
+            alert("your api key is : "+data["msg"])
         },
-        error: function(data){
-            console.log(data)
-            console.log('error')
+        error: function(req, status, err){
+            alert(JSON.parse(req.responseText)["msg"])
         }
     })
+
+
 })
